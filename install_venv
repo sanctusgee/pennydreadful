@@ -1,5 +1,4 @@
 ﻿echo "##########################
-###
 #### Flask install starting
 #############################"
 
@@ -10,15 +9,12 @@ cd pennydreadful
 echo "####################
 ##	creating flask virtual environment...
 ##############################"
-echo ""
 virtualenv flask
 source flask/bin/activate
 
-################
-##
+echo"################
 # installs Flask and required extensions
-###
-##################
+##################"
 
 flask/bin/pip install flask
 flask/bin/pip install flask-login
@@ -33,9 +29,14 @@ flask/bin/pip install guess_language
 flask/bin/pip install flipflop
 flask/bin/pip install coverage
 
-#########
-## create the folder to hold site artifacts
-################
+echo"################
+#  Flask installation complete
+##################"
+
+echo"#########
+## creating folder to hold site artifacts
+################"
 mkdir -p app/{static,templates}
 mkdir tmp
 
+echo "***** Succesfully installed Flask scaffolding ***"
