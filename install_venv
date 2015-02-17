@@ -1,12 +1,11 @@
-﻿
-echo "##########################
+﻿echo "##########################
 ###
 #### Flask install starting
 #############################"
 
-#cd $HOME
-#mkdir pennydreadful
-#cd pennydreadful
+cd $HOME
+mkdir pennydreadful
+cd pennydreadful
 
 echo "####################
 ##	creating flask virtual environment...
@@ -37,6 +36,6 @@ flask/bin/pip install coverage
 #########
 ## create the folder to hold site artifacts
 ################
-#mkdir -p app/{static,templates}
-#mkdir tmp
+mkdir -p app/{static,templates}
+mkdir tmp
 
