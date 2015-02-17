@@ -1,24 +1,26 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
-from flask.ext.login import login_user, logout_user, current_user, login_required
-<<<<<<< HEAD
-from app import app, lm, oid
-from forms import LoginForm
-from models import User
-=======
+from flask.ext.login import login_user, logout_user, current_user, \
+    login_required
 from app import app, db, lm, oid
 from .forms import LoginForm
 from .models import User
 
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
 @app.before_request
 def before_request():
     g.user = current_user
->>>>>>> staging
+
 
 @app.route('/')
 @app.route('/index')
 @login_required
 def index():
-    user = ['James', 'Miguel']
+    user = g.user
     posts = [
         {
             'author': {'nickname': 'John'},
@@ -26,7 +28,7 @@ def index():
         },
         {
             'author': {'nickname': 'Susan'},
-            'body': 'House of Cards is an awesome show!'
+            'body': 'The Avengers movie was so cool!'
         }
     ]
     return render_template('index.html',
@@ -36,10 +38,10 @@ def index():
 
 
 @app.route('/login', methods=['GET', 'POST'])
+@oid.loginhandler
 def login():
-    if g.user is no None and g.user is_authenticated():
-        return redirect(url_for('/index'))
-
+    if g.user is not None and g.user.is_authenticated():
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
@@ -49,11 +51,6 @@ def login():
                            form=form,
                            providers=app.config['OPENID_PROVIDERS'])
 
-<<<<<<< HEAD
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-=======
 
 @oid.after_login
 def after_login(resp):
@@ -80,4 +77,3 @@ def after_login(resp):
 def logout():
     logout_user()
     return redirect(url_for('index'))
->>>>>>> staging
