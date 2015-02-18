@@ -1,12 +1,12 @@
-blogTool
+Penny Dreadful
 
 A blog web application written in Python and Flask.
 
 Installation
 
-    Run source install_venv to setup a virtual environment, and all the required modules/libraries
+    From the command-line, run "source setup/install_venv" to auto-create a virtual environment, and install all the required modules/libraries
 
-    Run the db_create.py and db_upgrade.py scripts to create the SQLite database
+    Run the setup/db_create.py and setup/db_upgrade.py scripts to create the SQLite database
 
 Running
 
