@@ -31,6 +31,8 @@ class User(db.Model):
     def avatar(self, size):
         return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
 
+    #@staticmethod
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

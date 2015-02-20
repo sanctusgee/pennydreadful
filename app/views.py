@@ -77,10 +77,16 @@ def after_login(resp):
         flash('Invalid login. Please try again.')
         return redirect(url_for('login'))
     user = User.query.filter_by(email=resp.email).first()
+
+    # the user doesn't exist - a valid login
     if user is None:
         nickname = resp.nickname
+        ## create a nickname derived from email address if user leaves blank
         if nickname is None or nickname == "":
             nickname = resp.email.split('@')[0]
+
+        ## ensure uniqueness of nickname
+        nickname = User.make_unique_nickname(nickname)
         user = User(nickname=nickname, email=resp.email)
         db.session.add(user)
         db.session.commit()
